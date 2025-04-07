@@ -142,7 +142,7 @@ export default function UploadTab() {
         <h2 className="text-xl font-semibold mb-4">Upload Shapefile .zip(s)</h2>
         <p className="text-sm text-gray-700">
           Select one or more .zip shapefiles:
-          <br />• If filename includes "osm_with_buildings_removed", we treat it as substation polygons.
+          <br />• If filename includes &quot;osm_with_buildings_removed&quot;, we treat it as substation polygons.
           <br />• Otherwise, we treat them as substation components.
         </p>
         <input

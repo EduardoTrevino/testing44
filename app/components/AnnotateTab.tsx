@@ -442,7 +442,7 @@ export default function AnnotateTab() {
         {/* Toggle OSM data (UI) */}
         <div className="absolute top-2 right-2 z-[500] bg-white bg-opacity-90 p-2 rounded shadow-md flex items-center gap-2">
           <label htmlFor="toggle-osm" className="text-sm font-medium">
-            Show OSM Polygons (Shortcut "o")
+            Show OSM Polygons (Shortcut &quot;o&quot;)
           </label>
           <Switch
             id="toggle-osm"

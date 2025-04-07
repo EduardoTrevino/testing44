@@ -1,0 +1,7 @@
+services:
+  app:
+    build:
+      context: ./app
+      dockerfile: ./dockerfiles/Dockerfile.prod
+    ports:
+      - 5000:5000

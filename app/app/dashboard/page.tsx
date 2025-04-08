@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import AnnotateTab from "@/components/AnnotateTab"; // THIS is the big logic from above
 import CompleteTab from "@/components/CompleteTab";
-import UploadTab from "@/components/UploadTab";
 import DownloadTab from "@/components/DownloadTab";
 import UserHeader from "@/components/UserHeader";
 

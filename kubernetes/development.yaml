@@ -1,0 +1,78 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ExpertLabel-dev
+---
+
+# ExpertLabel
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ExpertLabel
+  namespace: ExpertLabel-dev
+spec:
+  selector:
+    matchLabels:
+      app: ExpertLabel
+  template:
+    metadata:
+      labels:
+        app: ExpertLabel
+    spec:
+      containers:
+        - name: ExpertLabel
+          image: ${CI_REGISTRY}/${CI_REGISTRY_PATH}:ExpertLabel-app-${GITHUB_RUN_NUMBER}
+          imagePullPolicy: Always
+          env:
+            - name: NEXT_PUBLIC_SUPABASE_URL
+              value: ${NEXT_PUBLIC_SUPABASE_URL}
+            - name: NEXT_PUBLIC_SUPABASE_ANON_KEY
+              value: ${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+          resources:
+            limits:
+              memory: "2Gi"
+              cpu: "500m"
+          ports:
+            - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ExpertLabel-service
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+spec:
+  type: LoadBalancer
+  ports:
+  - name: http
+    port: 80
+    targetPort: 3000
+  selector:
+    app: ExpertLabel
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ExpertLabel-ingress
+  namespace: ExpertLabel-dev
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      more_clear_headers "strict-transport-security";
+      more_clear_headers "x-content-type-options";
+      more_clear_headers "x-frame-options";
+      more_clear_headers "content-security-policy";
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+spec:
+  rules:
+    - host: expertlabel.dev.inl.gov
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ExpertLabel-service
+                port:
+                  number: 80

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
-import { supabase } from "@/lib/supabase";
+import { getSupabaseClient } from "@/lib/supabase";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -98,6 +98,7 @@ export default function CompleteTab() {
   }, []);
 
   async function fetchCompletedSubstations() {
+    const supabase = getSupabaseClient();
     const { data, error } = await supabase
       .from("substations")
       .select("*")
@@ -120,6 +121,7 @@ export default function CompleteTab() {
   }, [selectedSubstation]);
 
   async function fetchComponentPolygons(substationId: string) {
+    const supabase = getSupabaseClient();
     // assigned
     const { data: assigned, error: assignedErr } = await supabase
       .from("component_polygons")
@@ -201,6 +203,7 @@ export default function CompleteTab() {
     };
 
     if (isTemp) {
+      const supabase = getSupabaseClient();
       // insert
       const { data, error } = await supabase
         .from("component_polygons")
@@ -212,6 +215,7 @@ export default function CompleteTab() {
         console.error(error);
       }
     } else {
+      const supabase = getSupabaseClient();
       // update
       const { data, error } = await supabase
         .from("component_polygons")
@@ -237,6 +241,7 @@ export default function CompleteTab() {
       setDialogPolygon(null);
       return;
     }
+    const supabase = getSupabaseClient();
     const { error } = await supabase
       .from("component_polygons")
       .delete()
@@ -252,6 +257,7 @@ export default function CompleteTab() {
   // Optional "Reopen" substation => sets completed = false
   async function handleReopenSubstation() {
     if (!selectedSubstation) return;
+    const supabase = getSupabaseClient();
     const { error } = await supabase
       .from("substations")
       .update({ completed: false })

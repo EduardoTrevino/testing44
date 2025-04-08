@@ -1,11 +1,24 @@
-FROM python:3.9-slim
+FROM node:23.11.0-alpine3.20 AS build
 
-WORKDIR /app
+# Add missing packages
+RUN apk --no-check-certificate add wget ca-certificates
 
-RUN apt-get update && apt-get -y upgrade && sync
+# Configure INL certs and environment variables
+RUN wget -q -P /usr/local/share/ca-certificates/ http://certstore.inl.gov/pki/CAINLROOT_B64.crt
+RUN /usr/sbin/update-ca-certificates
+ENV NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
+ENV REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+ENV CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+ENV SSL_CERT_DIR=/etc/ssl/certs/
+
+RUN apk update && apk upgrade
+
+WORKDIR /usr/src/app
 
 COPY . .
 
-RUN pip install -r requirements.prod.txt
+RUN npm install
+RUN npm run build
 
-CMD ["gunicorn", "-b", "0.0.0.0:5000", "app:app"]
+CMD [ "npm", "run", "prod" ]

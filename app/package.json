@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "prod": "node .next/standalone/server.js",
     "start": "next start",
     "lint": "next lint"
   },
@@ -44,7 +45,6 @@
     "@types/react": "18.2.22",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.15",
-    "bufferutil": "^4.0.9",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
@@ -66,7 +66,7 @@
     "react": "^18.2.0",
     "react-day-picker": "^8.10.1",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.55.0",
+    "react-hook-form": "^7.54.1",
     
     "react-leaflet": "^4.2.1",
     "react-leaflet-draw": "^0.20.6",
@@ -80,9 +80,8 @@
     "tailwindcss-animate": "^1.0.7",
     "tiff.js": "^1.0.0",
     "typescript": "5.2.2",
-    "utf-8-validate": "^6.0.5",
     "vaul": "^0.9.9",
-    "zod": "^3.23.8",
+    "zod": "^3.24.1",
     "zustand": "^5.0.3"
   }
 }

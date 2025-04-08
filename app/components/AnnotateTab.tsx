@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
-import { supabase } from "@/lib/supabase";
+import { getSupabaseClient } from "@/lib/supabase";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -104,6 +104,7 @@ export default function AnnotateTab() {
   }, []);
 
   async function fetchSubstations() {
+    const supabase = getSupabaseClient();
     const { data, error } = await supabase
       .from("substations")
       .select("*")
@@ -146,6 +147,7 @@ export default function AnnotateTab() {
   }
 
   async function fetchComponentPolygons(substationId: string) {
+    const supabase = getSupabaseClient();
     // assigned
     const { data: assigned, error: assignedErr } = await supabase
       .from("component_polygons")
@@ -191,6 +193,7 @@ export default function AnnotateTab() {
 
   async function updateSubstationType(finalVal: string) {
     if (!selectedSubstation) return;
+    const supabase = getSupabaseClient();
     const { error } = await supabase
       .from("substations")
       .update({ substation_type: finalVal })
@@ -263,6 +266,7 @@ export default function AnnotateTab() {
     };
 
     if (isTemp) {
+      const supabase = getSupabaseClient();
       // insert
       const { data, error } = await supabase
         .from("component_polygons")
@@ -274,6 +278,7 @@ export default function AnnotateTab() {
         console.error(error);
       }
     } else {
+      const supabase = getSupabaseClient();
       // update
       const { data, error } = await supabase
         .from("component_polygons")
@@ -300,6 +305,7 @@ export default function AnnotateTab() {
       setDialogPolygon(null);
       return;
     }
+    const supabase = getSupabaseClient();
     const { error } = await supabase
       .from("component_polygons")
       .delete()
@@ -321,6 +327,7 @@ export default function AnnotateTab() {
       alert("Please select a substation type before completing.");
       return;
     }
+    const supabase = getSupabaseClient();
     const { error } = await supabase
       .from("substations")
       .update({ completed: true })

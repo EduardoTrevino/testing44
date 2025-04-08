@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { supabase } from "@/lib/supabase";
+import { getSupabaseClient } from "@/lib/supabase";
 import { Button } from "@/components/ui/button";
 
 
@@ -15,6 +15,7 @@ export default function DownloadTab() {
 
   // Fetch complete substations and their component polygons
   async function fetchCompleteAnnotations() {
+    const supabase = getSupabaseClient();
     // 1. Get complete substations
     let { data: completeSubs, error: subError } = await supabase
       .from("substations")

@@ -867,7 +867,7 @@ export default function AnnotateTab() {
                       </div>
                     ))}
                      {filteredComponentOptions.length === 0 && dialogSearchTerm && (
-                         <p className="text-sm text-gray-500 p-2">No matching components found for "{dialogSearchTerm}".</p>
+                         <p className="text-sm text-gray-500 p-2">No matching components found for {dialogSearchTerm}.</p>
                      )}
                   </div>
                 </ScrollArea>

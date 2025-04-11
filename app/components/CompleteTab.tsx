@@ -559,7 +559,7 @@ export default function CompleteTab() {
             <div>
               <label htmlFor="additional-info-comp" className="block text-sm font-medium text-gray-700 mb-1">Additional Info {selectedComponent === 'Other' ? '(Required)' : '(Optional)'}</label>
               <Textarea id="additional-info-comp" placeholder="e.g., Voltage, Model, Notes..." value={dialogAdditionalInfo} onChange={(e) => setDialogAdditionalInfo(e.target.value)} rows={2}/>
-               <p className="text-xs text-gray-500 mt-1">{selectedComponent === 'Other' ? 'Describe the component when selecting "Other".' : 'Any extra details.'}</p>
+               <p className="text-xs text-gray-500 mt-1">{selectedComponent === 'Other' ? 'Describe the component when selecting Other.' : 'Any extra details.'}</p>
             </div>
             {/* Component List */}
              <div>

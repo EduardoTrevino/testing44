@@ -3,8 +3,22 @@ kind: Namespace
 metadata:
   name: expertlabel-dev
 ---
-
-# ExpertLabel
+# Define a Persistent Volume Claim for the application to request storage.
+# This will be automatically provisioned by the cluster's default StorageClass.
+# The data here will persist across pod restarts and deployments.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: expertlabel-data-pvc
+  namespace: expertlabel-dev
+spec:
+  accessModes:
+    - ReadWriteOnce # Can be mounted as read-write by a single pod at a time.
+  resources:
+    requests:
+      storage: 1Gi # The amount of storage requested. Adjust as needed.
+---
+# ExpertLabel Deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -19,26 +33,44 @@ spec:
       labels:
         app: expertlabel
     spec:
+      # This Init Container runs to completion before the main container starts.
+      # Its job is to copy the initial data from the image to the persistent volume
+      # only if the volume is empty.
+      initContainers:
+      - name: init-data
+        image: ${CI_REGISTRY}/${CI_REGISTRY_PATH}:expertlabel-${GITHUB_RUN_NUMBER}
+        imagePullPolicy: Always
+        # This command checks if a file exists. If not, it copies the data and creates the file.
+        # This ensures the copy only happens on the very first startup.
+        command: ['sh', '-c', 'if [ ! -f /data/.initialized ]; then cp -r /usr/src/app/app/data/. /data/ && touch /data/.initialized; fi']
+        volumeMounts:
+        - name: expertlabel-data-storage
+          mountPath: /data # Mount the persistent volume at /data
       containers:
         - name: expertlabel
           image: ${CI_REGISTRY}/${CI_REGISTRY_PATH}:expertlabel-${GITHUB_RUN_NUMBER}
           imagePullPolicy: Always
-          env:
-            - name: NEXT_PUBLIC_SUPABASE_URL
-              value: ${NEXT_PUBLIC_SUPABASE_URL}
-            - name: NEXT_PUBLIC_SUPABASE_ANON_KEY
-              value: ${NEXT_PUBLIC_SUPABASE_ANON_KEY}
           resources:
             limits:
               memory: "2Gi"
               cpu: "500m"
           ports:
             - containerPort: 3000
+          # Mount the persistent volume into the container at the path where your app expects the data.
+          volumeMounts:
+            - name: expertlabel-data-storage
+              mountPath: /usr/src/app/app/data
+      # Define the volume to be used by the pod, linking it to the PVC.
+      volumes:
+        - name: expertlabel-data-storage
+          persistentVolumeClaim:
+            claimName: expertlabel-data-pvc
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: expertlabel-service
+  namespace: expertlabel-dev
   annotations:
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 spec:

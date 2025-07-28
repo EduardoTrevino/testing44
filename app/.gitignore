@@ -36,3 +36,6 @@ pass.txt
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# imagery
+/public/tiles

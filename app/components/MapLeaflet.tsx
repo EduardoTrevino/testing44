@@ -15,6 +15,7 @@ import { EditControl } from "react-leaflet-draw";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "leaflet-draw/dist/leaflet.draw.css";
+import PrivateTileLayer from './PrivateTileLayer';
 import { ScrollArea } from "@/components/ui/scroll-area"; // Import if using shadcn ScrollArea for legend
 
 // Interface matching AnnotateTab.tsx
@@ -256,6 +257,7 @@ interface MapLeafletProps {
   onPolygonCreated?: (geojson: any) => void;
   onPolygonClicked?: (poly: ComponentPolygon) => void;
   isMapFullscreen?: boolean;
+  tileUrlTemplate?: string | null;
 }
 
 export default function MapLeaflet({
@@ -279,6 +281,10 @@ export default function MapLeaflet({
       return polygons.find(p => p.label === 'power_substation_polygon')?.substation_id ?? 'no-substation-selected';
   }, [polygons]);
 
+  // Find the substation full_id, which we need for the tile path
+  const substationFullId = useMemo(() => {
+    return polygons.find(p => p.label === 'power_substation_polygon')?.substation_full_id;
+ }, [polygons]);
 
   // Build unique, sorted list of labels present in the current polygons (excluding boundary)
   const presentLabels = useMemo(() => {
@@ -291,6 +297,9 @@ export default function MapLeaflet({
         return Array.from(labels).sort((a, b) => a.localeCompare(b));
   }, [polygons]);
 
+  console.log("MapLeaflet Props check");
+  // console.log("Received tileurl template:", tileUrlTemplate)
+  console.log("calculated substationfullid:", substationFullId)
 
   return (
     <div style={{ width: "100%", height: "100%", position: "relative", background: '#f0f0f0' }}>
@@ -298,15 +307,27 @@ export default function MapLeaflet({
             style={{ width: "100%", height: "100%" }}
             center={[39.8283, -98.5795]} // Default center (e.g., US center)
             zoom={4} // Default zoom
-            maxZoom={24}
+            maxZoom={25}
             scrollWheelZoom={true} // Enable scroll wheel zoom
       >
+        {/* 1. Base Layer: Always render the Esri world imagery */}
         <TileLayer
           url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
           attribution='Idaho National Laboratory'
           maxNativeZoom={19}
           maxZoom={24}
         />
+
+        {/* 2. Custom Overlay: Conditionally render your private tiles on top */}
+        {substationFullId && (
+          <TileLayer
+            url={`/api/tiles/${substationFullId}/{z}/{x}/{y}.png`}
+            maxNativeZoom={23}
+            maxZoom={25}
+            zIndex={2}
+            noWrap={true}
+          />
+        )}
 
         {/* Fit bounds only on substation change */}
         <FitBoundsToSubstation polygons={polygons} substationId={substationId} />

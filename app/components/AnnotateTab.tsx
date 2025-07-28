@@ -75,6 +75,7 @@ interface SubstationData {
   geometry: any;
   created_at: string;
   completed: boolean;
+  tile_url_template?: string | null;
 }
 
 // Updated interface to include new fields

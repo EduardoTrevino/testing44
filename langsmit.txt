@@ -1,0 +1,1148 @@
+build
+succeeded 9 minutes ago in 2m 13s
+Search logs
+1s
+Current runner version: '2.321.0'
+Runner name: 'action-runner-de-6fc6bfc596-btxpw'
+Runner group name: 'DigitalEnterprise'
+Machine name: 'action-runner-de-6fc6bfc596-btxpw'
+GITHUB_TOKEN Permissions
+Secret source: Actions
+Prepare workflow directory
+Prepare all required actions
+Getting action download info
+Download action repository 'actions/checkout@v3' (SHA:f43a0e5ff2bd294095638e18286ca9a3d1956744)
+Complete job name: build
+1s
+Run actions/checkout@v3
+  with:
+    ref: development
+    repository: Digital-Engineering/ExpertLabelGDO
+    token: ***
+    ssh-strict: true
+    persist-credentials: true
+    clean: true
+    sparse-checkout-cone-mode: true
+    fetch-depth: 1
+    fetch-tags: false
+    lfs: false
+    submodules: false
+    set-safe-directory: true
+Syncing repository: Digital-Engineering/ExpertLabelGDO
+Getting Git version info
+  Working directory is '/work/_work/ExpertLabelGDO/ExpertLabelGDO'
+  /usr/bin/git version
+  git version 2.25.1
+Temporarily overriding HOME='/work/_work/_temp/cf0885d8-4df2-44dd-8b82-8948b909a016' before making global git config changes
+Adding repository directory to the temporary git global config as a safe directory
+/usr/bin/git config --global --add safe.directory /work/_work/ExpertLabelGDO/ExpertLabelGDO
+Deleting the contents of '/work/_work/ExpertLabelGDO/ExpertLabelGDO'
+Initializing the repository
+  /usr/bin/git init /work/_work/ExpertLabelGDO/ExpertLabelGDO
+  Initialized empty Git repository in /work/_work/ExpertLabelGDO/ExpertLabelGDO/.git/
+  /usr/bin/git remote add origin https://github.inl.gov/Digital-Engineering/ExpertLabelGDO
+Disabling automatic garbage collection
+  /usr/bin/git config --local gc.auto 0
+Setting up auth
+  /usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+  /usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+  /usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.inl\.gov\/\.extraheader
+  /usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.inl\.gov\/\.extraheader' && git config --local --unset-all 'http.https://github.inl.gov/.extraheader' || :"
+  /usr/bin/git config --local http.https://github.inl.gov/.extraheader AUTHORIZATION: basic ***
+Fetching the repository
+  /usr/bin/git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules --depth=1 origin +refs/heads/development*:refs/remotes/origin/development* +refs/tags/development*:refs/tags/development*
+  remote: Enumerating objects: 115, done.        
+  remote: Counting objects:   0% (1/115)        
+  remote: Counting objects:   1% (2/115)        
+  remote: Counting objects:   2% (3/115)        
+  remote: Counting objects:   3% (4/115)        
+  remote: Counting objects:   4% (5/115)        
+  remote: Counting objects:   5% (6/115)        
+  remote: Counting objects:   6% (7/115)        
+  remote: Counting objects:   7% (9/115)        
+  remote: Counting objects:   8% (10/115)        
+  remote: Counting objects:   9% (11/115)        
+  remote: Counting objects:  10% (12/115)        
+  remote: Counting objects:  11% (13/115)        
+  remote: Counting objects:  12% (14/115)        
+  remote: Counting objects:  13% (15/115)        
+  remote: Counting objects:  14% (17/115)        
+  remote: Counting objects:  15% (18/115)        
+  remote: Counting objects:  16% (19/115)        
+  remote: Counting objects:  17% (20/115)        
+  remote: Counting objects:  18% (21/115)        
+  remote: Counting objects:  19% (22/115)        
+  remote: Counting objects:  20% (23/115)        
+  remote: Counting objects:  21% (25/115)        
+  remote: Counting objects:  22% (26/115)        
+  remote: Counting objects:  23% (27/115)        
+  remote: Counting objects:  24% (28/115)        
+  remote: Counting objects:  25% (29/115)        
+  remote: Counting objects:  26% (30/115)        
+  remote: Counting objects:  27% (32/115)        
+  remote: Counting objects:  28% (33/115)        
+  remote: Counting objects:  29% (34/115)        
+  remote: Counting objects:  30% (35/115)        
+  remote: Counting objects:  31% (36/115)        
+  remote: Counting objects:  32% (37/115)        
+  remote: Counting objects:  33% (38/115)        
+  remote: Counting objects:  34% (40/115)        
+  remote: Counting objects:  35% (41/115)        
+  remote: Counting objects:  36% (42/115)        
+  remote: Counting objects:  37% (43/115)        
+  remote: Counting objects:  38% (44/115)        
+  remote: Counting objects:  39% (45/115)        
+  remote: Counting objects:  40% (46/115)        
+  remote: Counting objects:  41% (48/115)        
+  remote: Counting objects:  42% (49/115)        
+  remote: Counting objects:  43% (50/115)        
+  remote: Counting objects:  44% (51/115)        
+  remote: Counting objects:  45% (52/115)        
+  remote: Counting objects:  46% (53/115)        
+  remote: Counting objects:  47% (55/115)        
+  remote: Counting objects:  48% (56/115)        
+  remote: Counting objects:  49% (57/115)        
+  remote: Counting objects:  50% (58/115)        
+  remote: Counting objects:  51% (59/115)        
+  remote: Counting objects:  52% (60/115)        
+  remote: Counting objects:  53% (61/115)        
+  remote: Counting objects:  54% (63/115)        
+  remote: Counting objects:  55% (64/115)        
+  remote: Counting objects:  56% (65/115)        
+  remote: Counting objects:  57% (66/115)        
+  remote: Counting objects:  58% (67/115)        
+  remote: Counting objects:  59% (68/115)        
+  remote: Counting objects:  60% (69/115)        
+  remote: Counting objects:  61% (71/115)        
+  remote: Counting objects:  62% (72/115)        
+  remote: Counting objects:  63% (73/115)        
+  remote: Counting objects:  64% (74/115)        
+  remote: Counting objects:  65% (75/115)        
+  remote: Counting objects:  66% (76/115)        
+  remote: Counting objects:  67% (78/115)        
+  remote: Counting objects:  68% (79/115)        
+  remote: Counting objects:  69% (80/115)        
+  remote: Counting objects:  70% (81/115)        
+  remote: Counting objects:  71% (82/115)        
+  remote: Counting objects:  72% (83/115)        
+  remote: Counting objects:  73% (84/115)        
+  remote: Counting objects:  74% (86/115)        
+  remote: Counting objects:  75% (87/115)        
+  remote: Counting objects:  76% (88/115)        
+  remote: Counting objects:  77% (89/115)        
+  remote: Counting objects:  78% (90/115)        
+  remote: Counting objects:  79% (91/115)        
+  remote: Counting objects:  80% (92/115)        
+  remote: Counting objects:  81% (94/115)        
+  remote: Counting objects:  82% (95/115)        
+  remote: Counting objects:  83% (96/115)        
+  remote: Counting objects:  84% (97/115)        
+  remote: Counting objects:  85% (98/115)        
+  remote: Counting objects:  86% (99/115)        
+  remote: Counting objects:  87% (101/115)        
+  remote: Counting objects:  88% (102/115)        
+  remote: Counting objects:  89% (103/115)        
+  remote: Counting objects:  90% (104/115)        
+  remote: Counting objects:  91% (105/115)        
+  remote: Counting objects:  92% (106/115)        
+  remote: Counting objects:  93% (107/115)        
+  remote: Counting objects:  94% (109/115)        
+  remote: Counting objects:  95% (110/115)        
+  remote: Counting objects:  96% (111/115)        
+  remote: Counting objects:  97% (112/115)        
+  remote: Counting objects:  98% (113/115)        
+  remote: Counting objects:  99% (114/115)        
+  remote: Counting objects: 100% (115/115)        
+  remote: Counting objects: 100% (115/115), done.        
+  remote: Compressing objects:   1% (1/93)        
+  remote: Compressing objects:   2% (2/93)        
+  remote: Compressing objects:   3% (3/93)        
+  remote: Compressing objects:   4% (4/93)        
+  remote: Compressing objects:   5% (5/93)        
+  remote: Compressing objects:   6% (6/93)        
+  remote: Compressing objects:   7% (7/93)        
+  remote: Compressing objects:   8% (8/93)        
+  remote: Compressing objects:   9% (9/93)        
+  remote: Compressing objects:  10% (10/93)        
+  remote: Compressing objects:  11% (11/93)        
+  remote: Compressing objects:  12% (12/93)        
+  remote: Compressing objects:  13% (13/93)        
+  remote: Compressing objects:  15% (14/93)        
+  remote: Compressing objects:  16% (15/93)        
+  remote: Compressing objects:  17% (16/93)        
+  remote: Compressing objects:  18% (17/93)        
+  remote: Compressing objects:  19% (18/93)        
+  remote: Compressing objects:  20% (19/93)        
+  remote: Compressing objects:  21% (20/93)        
+  remote: Compressing objects:  22% (21/93)        
+  remote: Compressing objects:  23% (22/93)        
+  remote: Compressing objects:  24% (23/93)        
+  remote: Compressing objects:  25% (24/93)        
+  remote: Compressing objects:  26% (25/93)        
+  remote: Compressing objects:  27% (26/93)        
+  remote: Compressing objects:  29% (27/93)        
+  remote: Compressing objects:  30% (28/93)        
+  remote: Compressing objects:  31% (29/93)        
+  remote: Compressing objects:  32% (30/93)        
+  remote: Compressing objects:  33% (31/93)        
+  remote: Compressing objects:  34% (32/93)        
+  remote: Compressing objects:  35% (33/93)        
+  remote: Compressing objects:  36% (34/93)        
+  remote: Compressing objects:  37% (35/93)        
+  remote: Compressing objects:  38% (36/93)        
+  remote: Compressing objects:  39% (37/93)        
+  remote: Compressing objects:  40% (38/93)        
+  remote: Compressing objects:  41% (39/93)        
+  remote: Compressing objects:  43% (40/93)        
+  remote: Compressing objects:  44% (41/93)        
+  remote: Compressing objects:  45% (42/93)        
+  remote: Compressing objects:  46% (43/93)        
+  remote: Compressing objects:  47% (44/93)        
+  remote: Compressing objects:  48% (45/93)        
+  remote: Compressing objects:  49% (46/93)        
+  remote: Compressing objects:  50% (47/93)        
+  remote: Compressing objects:  51% (48/93)        
+  remote: Compressing objects:  52% (49/93)        
+  remote: Compressing objects:  53% (50/93)        
+  remote: Compressing objects:  54% (51/93)        
+  remote: Compressing objects:  55% (52/93)        
+  remote: Compressing objects:  56% (53/93)        
+  remote: Compressing objects:  58% (54/93)        
+  remote: Compressing objects:  59% (55/93)        
+  remote: Compressing objects:  60% (56/93)        
+  remote: Compressing objects:  61% (57/93)        
+  remote: Compressing objects:  62% (58/93)        
+  remote: Compressing objects:  63% (59/93)        
+  remote: Compressing objects:  64% (60/93)        
+  remote: Compressing objects:  65% (61/93)        
+  remote: Compressing objects:  66% (62/93)        
+  remote: Compressing objects:  67% (63/93)        
+  remote: Compressing objects:  68% (64/93)        
+  remote: Compressing objects:  69% (65/93)        
+  remote: Compressing objects:  70% (66/93)        
+  remote: Compressing objects:  72% (67/93)        
+  remote: Compressing objects:  73% (68/93)        
+  remote: Compressing objects:  74% (69/93)        
+  remote: Compressing objects:  75% (70/93)        
+  remote: Compressing objects:  76% (71/93)        
+  remote: Compressing objects:  77% (72/93)        
+  remote: Compressing objects:  78% (73/93)        
+  remote: Compressing objects:  79% (74/93)        
+  remote: Compressing objects:  80% (75/93)        
+  remote: Compressing objects:  81% (76/93)        
+  remote: Compressing objects:  82% (77/93)        
+  remote: Compressing objects:  83% (78/93)        
+  remote: Compressing objects:  84% (79/93)        
+  remote: Compressing objects:  86% (80/93)        
+  remote: Compressing objects:  87% (81/93)        
+  remote: Compressing objects:  88% (82/93)        
+  remote: Compressing objects:  89% (83/93)        
+  remote: Compressing objects:  90% (84/93)        
+  remote: Compressing objects:  91% (85/93)        
+  remote: Compressing objects:  92% (86/93)        
+  remote: Compressing objects:  93% (87/93)        
+  remote: Compressing objects:  94% (88/93)        
+  remote: Compressing objects:  95% (89/93)        
+  remote: Compressing objects:  96% (90/93)        
+  remote: Compressing objects:  97% (91/93)        
+  remote: Compressing objects:  98% (92/93)        
+  remote: Compressing objects: 100% (93/93)        
+  remote: Compressing objects: 100% (93/93), done.        
+  Receiving objects:   0% (1/115)
+  Receiving objects:   1% (2/115)
+  Receiving objects:   2% (3/115)
+  Receiving objects:   3% (4/115)
+  Receiving objects:   4% (5/115)
+  Receiving objects:   5% (6/115)
+  Receiving objects:   6% (7/115)
+  Receiving objects:   7% (9/115)
+  Receiving objects:   8% (10/115)
+  Receiving objects:   9% (11/115)
+  Receiving objects:  10% (12/115)
+  Receiving objects:  11% (13/115)
+  Receiving objects:  12% (14/115)
+  Receiving objects:  13% (15/115)
+  Receiving objects:  14% (17/115)
+  Receiving objects:  15% (18/115)
+  Receiving objects:  16% (19/115)
+  Receiving objects:  17% (20/115)
+  Receiving objects:  18% (21/115)
+  Receiving objects:  19% (22/115)
+  Receiving objects:  20% (23/115)
+  Receiving objects:  21% (25/115)
+  Receiving objects:  22% (26/115)
+  Receiving objects:  23% (27/115)
+  Receiving objects:  24% (28/115)
+  Receiving objects:  25% (29/115)
+  Receiving objects:  26% (30/115)
+  Receiving objects:  27% (32/115)
+  Receiving objects:  28% (33/115)
+  Receiving objects:  29% (34/115)
+  Receiving objects:  30% (35/115)
+  Receiving objects:  31% (36/115)
+  Receiving objects:  32% (37/115)
+  Receiving objects:  33% (38/115)
+  Receiving objects:  34% (40/115)
+  Receiving objects:  35% (41/115)
+  Receiving objects:  36% (42/115)
+  Receiving objects:  37% (43/115)
+  Receiving objects:  38% (44/115)
+  Receiving objects:  39% (45/115)
+  Receiving objects:  40% (46/115)
+  Receiving objects:  41% (48/115)
+  Receiving objects:  42% (49/115)
+  Receiving objects:  43% (50/115)
+  Receiving objects:  44% (51/115)
+  Receiving objects:  45% (52/115)
+  Receiving objects:  46% (53/115)
+  Receiving objects:  47% (55/115)
+  Receiving objects:  48% (56/115)
+  Receiving objects:  49% (57/115)
+  Receiving objects:  50% (58/115)
+  Receiving objects:  51% (59/115)
+  Receiving objects:  52% (60/115)
+  Receiving objects:  53% (61/115)
+  Receiving objects:  54% (63/115)
+  Receiving objects:  55% (64/115)
+  Receiving objects:  56% (65/115)
+  Receiving objects:  57% (66/115)
+  Receiving objects:  58% (67/115)
+  Receiving objects:  59% (68/115)
+  Receiving objects:  60% (69/115)
+  Receiving objects:  61% (71/115)
+  Receiving objects:  62% (72/115)
+  Receiving objects:  63% (73/115)
+  Receiving objects:  64% (74/115)
+  Receiving objects:  65% (75/115)
+  Receiving objects:  66% (76/115)
+  Receiving objects:  67% (78/115)
+  Receiving objects:  68% (79/115)
+  Receiving objects:  69% (80/115)
+  Receiving objects:  70% (81/115)
+  Receiving objects:  71% (82/115)
+  Receiving objects:  72% (83/115)
+  Receiving objects:  73% (84/115)
+  Receiving objects:  74% (86/115)
+  Receiving objects:  75% (87/115)
+  Receiving objects:  76% (88/115)
+  Receiving objects:  77% (89/115)
+  Receiving objects:  78% (90/115)
+  Receiving objects:  79% (91/115)
+  Receiving objects:  80% (92/115)
+  Receiving objects:  81% (94/115)
+  Receiving objects:  82% (95/115)
+  Receiving objects:  83% (96/115)
+  Receiving objects:  84% (97/115)
+  Receiving objects:  85% (98/115)
+  Receiving objects:  86% (99/115)
+  Receiving objects:  87% (101/115)
+  remote: Total 115 (delta 12), reused 99 (delta 10), pack-reused 0 (from 0)        
+  Receiving objects:  88% (102/115)
+  Receiving objects:  89% (103/115)
+  Receiving objects:  90% (104/115)
+  Receiving objects:  91% (105/115)
+  Receiving objects:  92% (106/115)
+  Receiving objects:  93% (107/115)
+  Receiving objects:  94% (109/115)
+  Receiving objects:  95% (110/115)
+  Receiving objects:  96% (111/115)
+  Receiving objects:  97% (112/115)
+  Receiving objects:  98% (113/115)
+  Receiving objects:  99% (114/115)
+  Receiving objects: 100% (115/115)
+  Receiving objects: 100% (115/115), 1.43 MiB | 20.39 MiB/s, done.
+  Resolving deltas:   0% (0/12)
+  Resolving deltas:   8% (1/12)
+  Resolving deltas:  16% (2/12)
+  Resolving deltas:  25% (3/12)
+  Resolving deltas:  50% (6/12)
+  Resolving deltas:  75% (9/12)
+  Resolving deltas:  91% (11/12)
+  Resolving deltas: 100% (12/12)
+  Resolving deltas: 100% (12/12), done.
+  From https://github.inl.gov/Digital-Engineering/ExpertLabelGDO
+   * [new branch]      development -> origin/development
+Determining the checkout info
+  /usr/bin/git branch --list --remote origin/development
+    origin/development
+Checking out the ref
+  /usr/bin/git checkout --progress --force -B development refs/remotes/origin/development
+  Switched to a new branch 'development'
+  Branch 'development' set up to track remote branch 'development' from 'origin'.
+/usr/bin/git log -1 --format='%H'
+'138642014f6e3252109ba57167f76f7020d02f99'
+2m 11s
+Run cd $GITHUB_WORKSPACE/app
+  cd $GITHUB_WORKSPACE/app
+  envsubst < .env-sample > .env.local
+  cd $GITHUB_WORKSPACE
+  az cloud set --name AzureUSGovernment
+  az login --service-principal -u $ACR_SP_USER -p $ACR_SP_PASSWORD --tenant $ACR_SP_TENANT
+  az account set --subscription $ACR_SUBSCRIPTION
+  az acr build --registry $ACR_REGISTRY --image $ACR_PATH:expertlabel-$GITHUB_RUN_NUMBER --file app/Dockerfiles/Dockerfile.prod app
+  shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+  env:
+    ACR_SP_USER: ***
+    ACR_SP_PASSWORD: ***
+    ACR_REGISTRY: ***
+    ACR_PATH: ***
+    ACR_SP_TENANT: ***
+    ACR_SUBSCRIPTION: ***
+    GITHUB_RUN_NUMBER: 14
+    NEXT_PUBLIC_SUPABASE_URL: ***
+    NEXT_PUBLIC_SUPABASE_ANON_KEY: ***
+WARNING: Switched active cloud to 'AzureUSGovernment'.
+WARNING: Use 'az login' to log in to this cloud.
+WARNING: Use 'az account set' to set the active subscription.
+[
+  {
+    "cloudName": "AzureUSGovernment",
+    "homeTenantId": "***",
+    "id": "4c740c53-dbda-4daa-bc62-eed45d6d19a7",
+    "isDefault": true,
+    "managedByTenants": [],
+    "name": "INL Gov Hub",
+    "state": "Enabled",
+    "tenantId": "***",
+    "user": {
+      "name": "***",
+      "type": "servicePrincipal"
+    }
+  },
+  {
+    "cloudName": "AzureUSGovernment",
+    "homeTenantId": "***",
+    "id": "***",
+    "isDefault": false,
+    "managedByTenants": [],
+    "name": "VTR Prod",
+    "state": "Enabled",
+    "tenantId": "***",
+    "user": {
+      "name": "***",
+      "type": "servicePrincipal"
+    }
+  }
+]
+WARNING: The login server endpoint suffix '.azurecr.us' is automatically omitted.
+WARNING: Packing source code into tar to upload...
+WARNING: Excluding '.gitignore' based on default ignore rules
+WARNING: Uploading archived source code from '/tmp/build_archive_42a5a7fdafc646e1b7139f4babe981b3.tar.gz'...
+WARNING: Sending context (1.343 MiB) to registry: gvadecr...
+WARNING: Queued a build with ID: ha53r
+WARNING: Waiting for an agent...
+2025/07/29 02:47:41 Downloading source code...
+2025/07/29 02:47:42 Finished downloading source code
+2025/07/29 02:47:42 Using acb_vol_ec9b3808-cd47-4bb4-b716-d5637be04743 as the home volume
+2025/07/29 02:47:42 Setting up Docker configuration...
+2025/07/29 02:47:42 Successfully set up Docker configuration
+2025/07/29 02:47:42 Logging in to registry: ***
+2025/07/29 02:47:43 Successfully logged into ***
+2025/07/29 02:47:43 Executing step ID: build. Timeout(sec): 28800, Working directory: '', Network: ''
+2025/07/29 02:47:43 Scanning for dependencies...
+2025/07/29 02:47:43 Successfully scanned dependencies
+2025/07/29 02:47:43 Launching container with name: build
+Sending build context to Docker daemon  10.98MB
+
+
+Step 1/7 : FROM node:23.11.0-alpine3.20 AS build
+23.11.0-alpine3.20: Pulling from library/node
+0a9a5dfd008f: Pulling fs layer
+db8ffcfa3f3b: Pulling fs layer
+ea6b475d37e4: Pulling fs layer
+39eac384a114: Pulling fs layer
+39eac384a114: Waiting
+ea6b475d37e4: Verifying Checksum
+ea6b475d37e4: Download complete
+0a9a5dfd008f: Download complete
+39eac384a114: Verifying Checksum
+39eac384a114: Download complete
+0a9a5dfd008f: Pull complete
+db8ffcfa3f3b: Download complete
+db8ffcfa3f3b: Pull complete
+ea6b475d37e4: Pull complete
+39eac384a114: Pull complete
+Digest: sha256:45b0799541e0fa993516a147bd9c59a5c2b81ec06cfb8f6e6e18d222f2780e23
+Status: Downloaded newer image for node:23.11.0-alpine3.20
+ ---> c93051b3fd83
+Step 2/7 : RUN apk update && apk upgrade
+ ---> Running in add1dadbef91
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.20/main/x86_64/APKINDEX.tar.gz
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.20/community/x86_64/APKINDEX.tar.gz
+v3.20.7-20-g448c64cf5d1 [https://dl-cdn.alpinelinux.org/alpine/v3.20/main]
+v3.20.7-19-gcfd2c06a1ed [https://dl-cdn.alpinelinux.org/alpine/v3.20/community]
+OK: 24174 distinct packages available
+(1/3) Upgrading ca-certificates-bundle (20241121-r1 -> 20250619-r0)
+(2/3) Upgrading libcrypto3 (3.3.3-r0 -> 3.3.4-r0)
+(3/3) Upgrading libssl3 (3.3.3-r0 -> 3.3.4-r0)
+OK: 10 MiB in 16 packages
+Removing intermediate container add1dadbef91
+ ---> fc1ba5624aee
+Step 3/7 : WORKDIR /usr/src/app
+ ---> Running in 83fb0e6559ae
+Removing intermediate container 83fb0e6559ae
+ ---> 17b23bf7ab6e
+Step 4/7 : COPY . .
+ ---> 55677a96aca1
+Step 5/7 : RUN npm install
+ ---> Running in 883e2a990349
+npm warn deprecated urix@0.1.0: Please see https://github.com/lydell/urix#deprecated
+npm warn deprecated source-map-resolve@0.5.3: See https://github.com/lydell/source-map-resolve#deprecated
+npm warn deprecated source-map-url@0.4.1: See https://github.com/lydell/source-map-url#deprecated
+npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+npm warn deprecated resolve-url@0.2.1: https://github.com/lydell/resolve-url#deprecated
+npm warn deprecated move-concurrently@1.0.1: This package is no longer supported.
+npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+npm warn deprecated glob@7.1.7: Glob versions prior to v9 are no longer supported
+npm warn deprecated fs-write-stream-atomic@1.0.10: This package is no longer supported.
+npm warn deprecated figgy-pudding@3.5.2: This module is no longer supported.
+npm warn deprecated copy-concurrently@1.0.5: This package is no longer supported.
+npm warn deprecated @humanwhocodes/object-schema@2.0.3: Use @eslint/object-schema instead
+npm warn deprecated @humanwhocodes/config-array@0.11.14: Use @eslint/config-array instead
+npm warn deprecated rimraf@2.7.1: Rimraf versions prior to v4 are no longer supported
+npm warn deprecated rimraf@2.7.1: Rimraf versions prior to v4 are no longer supported
+npm warn deprecated rimraf@2.7.1: Rimraf versions prior to v4 are no longer supported
+npm warn deprecated eslint@8.49.0: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+
+added 1130 packages, and audited 1131 packages in 21s
+
+175 packages are looking for funding
+  run `npm fund` for details
+
+14 vulnerabilities (1 low, 5 moderate, 6 high, 2 critical)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues, run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+npm notice
+npm notice New major version of npm available! 10.9.2 -> 11.5.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.5.1
+npm notice To update run: npm install -g npm@11.5.1
+npm notice
+Removing intermediate container 883e2a990349
+ ---> 5d0d3e7b2883
+Step 6/7 : RUN npm run build
+ ---> Running in 954ad9955597
+
+> nextjs@0.1.0 build
+> next build
+
+Attention: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://nextjs.org/telemetry
+
+   Creating an optimized production build...
+(node:17) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ✓ Compiled successfully
+   Linting and checking validity of types...
+
+./components/AnnotateTab.tsx
+133:6  Warning: React Hook useEffect has a missing dependency: 'fetchSubstations'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+141:6  Warning: React Hook useEffect has a missing dependency: 'fetchComponentPolygons'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./components/CompleteTab.tsx
+97:6  Warning: React Hook useEffect has a missing dependency: 'fetchCompletedSubstations'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+107:6  Warning: React Hook useEffect has a missing dependency: 'fetchComponentPolygons'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+./components/MapLeaflet.tsx
+82:6  Warning: React Hook useEffect has a missing dependency: 'polygons'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/basic-features/eslint#disabling-rules
+   Collecting page data...
+   Generating static pages (0/7)...
+
+   Generating static pages (1/7)
+
+
+   Generating static pages (3/7)
+
+
+   Generating static pages (5/7)
+
+
+ ✓ Generating static pages (7/7)
+   Finalizing page optimization...
+
+Route (app)                              Size     First Load JS
+┌ ○ /                                    6.52 kB        94.7 kB
+├ ○ /_not-found                          872 B          80.6 kB
+├ λ /api/polygons                        0 B                0 B
+├ λ /api/substations                     0 B                0 B
+├ λ /api/tiles/[...all]                  0 B                0 B
+└ ○ /dashboard                           31.1 kB         119 kB
++ First Load JS shared by all            79.7 kB
+  ├ chunks/864-a2583252fd291647.js       26.5 kB
+  ├ chunks/fd9d1056-4247e967af11df81.js  50.9 kB
+  ├ chunks/main-app-56f8dc33ae6012ac.js  220 B
+  └ chunks/webpack-c57a6fd721208171.js   2.14 kB
+
+
+λ  (Server)  server-side renders at runtime (uses getInitialProps or getServerSideProps)
+○  (Static)  automatically rendered as static HTML (uses no initial props)
+
+Removing intermediate container 954ad9955597
+ ---> 996501848e95
+Step 7/7 : CMD [ "npm", "run", "start" ]
+ ---> Running in 8e048d3d1c8e
+Removing intermediate container 8e048d3d1c8e
+ ---> a26cd9eb381b
+Successfully built a26cd9eb381b
+Successfully tagged ***/***:expertlabel-14
+2025/07/29 02:49:01 Successfully executed container: build
+2025/07/29 02:49:01 Executing step ID: push. Timeout(sec): 3600, Working directory: '', Network: ''
+2025/07/29 02:49:01 Pushing image: ***/***:expertlabel-14, attempt 1
+The push refers to repository [***/***]
+d446fb607d7f: Preparing
+7597d61b622f: Preparing
+3e51297419a6: Preparing
+ebaf72d2b082: Preparing
+3fa3eb707725: Preparing
+830318aeeae0: Preparing
+dbde533c442d: Preparing
+0cec64dd9d57: Preparing
+994456c4fd7b: Preparing
+830318aeeae0: Waiting
+dbde533c442d: Waiting
+0cec64dd9d57: Waiting
+994456c4fd7b: Waiting
+ebaf72d2b082: Pushed
+830318aeeae0: Layer already exists
+dbde533c442d: Layer already exists
+3e51297419a6: Pushed
+0cec64dd9d57: Layer already exists
+3fa3eb707725: Pushed
+994456c4fd7b: Layer already exists
+d446fb607d7f: Pushed
+
+7597d61b622f: Pushed
+expertlabel-14: digest: sha256:c69c80f7150e638ffc24cbcd20e60e5153adcc50c29dd55a19ef52b1d90beddb size: 2211
+2025/07/29 02:49:41 Successfully pushed image: ***/***:expertlabel-14
+2025/07/29 02:49:41 Step ID: build marked as successful (elapsed time in seconds: 78.285516)
+2025/07/29 02:49:41 Populating digests for step ID: build...
+2025/07/29 02:49:42 Successfully populated digests for step ID: build
+2025/07/29 02:49:42 Step ID: push marked as successful (elapsed time in seconds: 39.725187)
+2025/07/29 02:49:42 The following dependencies were found:
+2025/07/29 02:49:42 
+- image:
+    registry: ***
+    repository: ***
+    tag: expertlabel-14
+    digest: sha256:c69c80f7150e638ffc24cbcd20e60e5153adcc50c29dd55a19ef52b1d90beddb
+  runtime-dependency:
+    registry: registry.hub.docker.com
+    repository: library/node
+    tag: 23.11.0-alpine3.20
+    digest: sha256:45b0799541e0fa993516a147bd9c59a5c2b81ec06cfb8f6e6e18d222f2780e23
+  git: {}
+
+
+Run ID: ha53r was successful after 2m2s
+0s
+Post job cleanup.
+/usr/bin/git version
+git version 2.25.1
+Temporarily overriding HOME='/work/_work/_temp/de68cd7d-ee64-4823-bdb8-d8d8cb7ab50e' before making global git config changes
+Adding repository directory to the temporary git global config as a safe directory
+/usr/bin/git config --global --add safe.directory /work/_work/ExpertLabelGDO/ExpertLabelGDO
+/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.inl\.gov\/\.extraheader
+http.https://github.inl.gov/.extraheader
+/usr/bin/git config --local --unset-all http.https://github.inl.gov/.extraheader
+/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.inl\.gov\/\.extraheader' && git config --local --unset-all 'http.https://github.inl.gov/.extraheader' || :"
+0s
+Cleaning up orphan processes
+Terminate orphan process: pid (409) (python3)
+
+kubernetes
+succeeded 1 minute ago in 50s
+Search logs
+5s
+Current runner version: '2.321.0'
+Runner name: 'action-runner-de-6fc6bfc596-grrxb'
+Runner group name: 'DigitalEnterprise'
+Machine name: 'action-runner-de-6fc6bfc596-grrxb'
+GITHUB_TOKEN Permissions
+Secret source: Actions
+Prepare workflow directory
+Prepare all required actions
+Getting action download info
+Download action repository 'actions/checkout@v3' (SHA:f43a0e5ff2bd294095638e18286ca9a3d1956744)
+Download action repository 'azure/setup-kubectl@v3' (SHA:901a10e89ea615cf61f57ac05cecdf23e7de06d8)
+Download action repository 'azure/k8s-set-context@v3' (SHA:38d6bc72e5877b8eb640e995218d42b8fedf1a47)
+Download action repository 'Azure/k8s-deploy@v4' (SHA:1082a9290dd683dfe1d60582f418a27684e3a391)
+Complete job name: kubernetes
+0s
+Run actions/checkout@v3
+Syncing repository: Digital-Engineering/ExpertLabelGDO
+Getting Git version info
+Temporarily overriding HOME='/work/_work/_temp/56623659-df2a-41f9-b554-c252d91e54b0' before making global git config changes
+Adding repository directory to the temporary git global config as a safe directory
+/usr/bin/git config --global --add safe.directory /work/_work/ExpertLabelGDO/ExpertLabelGDO
+Deleting the contents of '/work/_work/ExpertLabelGDO/ExpertLabelGDO'
+Initializing the repository
+Disabling automatic garbage collection
+  /usr/bin/git config --local gc.auto 0
+Setting up auth
+  /usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+  /usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+  /usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.inl\.gov\/\.extraheader
+  /usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.inl\.gov\/\.extraheader' && git config --local --unset-all 'http.https://github.inl.gov/.extraheader' || :"
+  /usr/bin/git config --local http.https://github.inl.gov/.extraheader AUTHORIZATION: basic ***
+Fetching the repository
+  /usr/bin/git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules --depth=1 origin +refs/heads/development*:refs/remotes/origin/development* +refs/tags/development*:refs/tags/development*
+  remote: Enumerating objects: 115, done.        
+  remote: Counting objects:   0% (1/115)        
+  remote: Counting objects:   1% (2/115)        
+  remote: Counting objects:   2% (3/115)        
+  remote: Counting objects:   3% (4/115)        
+  remote: Counting objects:   4% (5/115)        
+  remote: Counting objects:   5% (6/115)        
+  remote: Counting objects:   6% (7/115)        
+  remote: Counting objects:   7% (9/115)        
+  remote: Counting objects:   8% (10/115)        
+  remote: Counting objects:   9% (11/115)        
+  remote: Counting objects:  10% (12/115)        
+  remote: Counting objects:  11% (13/115)        
+  remote: Counting objects:  12% (14/115)        
+  remote: Counting objects:  13% (15/115)        
+  remote: Counting objects:  14% (17/115)        
+  remote: Counting objects:  15% (18/115)        
+  remote: Counting objects:  16% (19/115)        
+  remote: Counting objects:  17% (20/115)        
+  remote: Counting objects:  18% (21/115)        
+  remote: Counting objects:  19% (22/115)        
+  remote: Counting objects:  20% (23/115)        
+  remote: Counting objects:  21% (25/115)        
+  remote: Counting objects:  22% (26/115)        
+  remote: Counting objects:  23% (27/115)        
+  remote: Counting objects:  24% (28/115)        
+  remote: Counting objects:  25% (29/115)        
+  remote: Counting objects:  26% (30/115)        
+  remote: Counting objects:  27% (32/115)        
+  remote: Counting objects:  28% (33/115)        
+  remote: Counting objects:  29% (34/115)        
+  remote: Counting objects:  30% (35/115)        
+  remote: Counting objects:  31% (36/115)        
+  remote: Counting objects:  32% (37/115)        
+  remote: Counting objects:  33% (38/115)        
+  remote: Counting objects:  34% (40/115)        
+  remote: Counting objects:  35% (41/115)        
+  remote: Counting objects:  36% (42/115)        
+  remote: Counting objects:  37% (43/115)        
+  remote: Counting objects:  38% (44/115)        
+  remote: Counting objects:  39% (45/115)        
+  remote: Counting objects:  40% (46/115)        
+  remote: Counting objects:  41% (48/115)        
+  remote: Counting objects:  42% (49/115)        
+  remote: Counting objects:  43% (50/115)        
+  remote: Counting objects:  44% (51/115)        
+  remote: Counting objects:  45% (52/115)        
+  remote: Counting objects:  46% (53/115)        
+  remote: Counting objects:  47% (55/115)        
+  remote: Counting objects:  48% (56/115)        
+  remote: Counting objects:  49% (57/115)        
+  remote: Counting objects:  50% (58/115)        
+  remote: Counting objects:  51% (59/115)        
+  remote: Counting objects:  52% (60/115)        
+  remote: Counting objects:  53% (61/115)        
+  remote: Counting objects:  54% (63/115)        
+  remote: Counting objects:  55% (64/115)        
+  remote: Counting objects:  56% (65/115)        
+  remote: Counting objects:  57% (66/115)        
+  remote: Counting objects:  58% (67/115)        
+  remote: Counting objects:  59% (68/115)        
+  remote: Counting objects:  60% (69/115)        
+  remote: Counting objects:  61% (71/115)        
+  remote: Counting objects:  62% (72/115)        
+  remote: Counting objects:  63% (73/115)        
+  remote: Counting objects:  64% (74/115)        
+  remote: Counting objects:  65% (75/115)        
+  remote: Counting objects:  66% (76/115)        
+  remote: Counting objects:  67% (78/115)        
+  remote: Counting objects:  68% (79/115)        
+  remote: Counting objects:  69% (80/115)        
+  remote: Counting objects:  70% (81/115)        
+  remote: Counting objects:  71% (82/115)        
+  remote: Counting objects:  72% (83/115)        
+  remote: Counting objects:  73% (84/115)        
+  remote: Counting objects:  74% (86/115)        
+  remote: Counting objects:  75% (87/115)        
+  remote: Counting objects:  76% (88/115)        
+  remote: Counting objects:  77% (89/115)        
+  remote: Counting objects:  78% (90/115)        
+  remote: Counting objects:  79% (91/115)        
+  remote: Counting objects:  80% (92/115)        
+  remote: Counting objects:  81% (94/115)        
+  remote: Counting objects:  82% (95/115)        
+  remote: Counting objects:  83% (96/115)        
+  remote: Counting objects:  84% (97/115)        
+  remote: Counting objects:  85% (98/115)        
+  remote: Counting objects:  86% (99/115)        
+  remote: Counting objects:  87% (101/115)        
+  remote: Counting objects:  88% (102/115)        
+  remote: Counting objects:  89% (103/115)        
+  remote: Counting objects:  90% (104/115)        
+  remote: Counting objects:  91% (105/115)        
+  remote: Counting objects:  92% (106/115)        
+  remote: Counting objects:  93% (107/115)        
+  remote: Counting objects:  94% (109/115)        
+  remote: Counting objects:  95% (110/115)        
+  remote: Counting objects:  96% (111/115)        
+  remote: Counting objects:  97% (112/115)        
+  remote: Counting objects:  98% (113/115)        
+  remote: Counting objects:  99% (114/115)        
+  remote: Counting objects: 100% (115/115)        
+  remote: Counting objects: 100% (115/115), done.        
+  remote: Compressing objects:   1% (1/93)        
+  remote: Compressing objects:   2% (2/93)        
+  remote: Compressing objects:   3% (3/93)        
+  remote: Compressing objects:   4% (4/93)        
+  remote: Compressing objects:   5% (5/93)        
+  remote: Compressing objects:   6% (6/93)        
+  remote: Compressing objects:   7% (7/93)        
+  remote: Compressing objects:   8% (8/93)        
+  remote: Compressing objects:   9% (9/93)        
+  remote: Compressing objects:  10% (10/93)        
+  remote: Compressing objects:  11% (11/93)        
+  remote: Compressing objects:  12% (12/93)        
+  remote: Compressing objects:  13% (13/93)        
+  remote: Compressing objects:  15% (14/93)        
+  remote: Compressing objects:  16% (15/93)        
+  remote: Compressing objects:  17% (16/93)        
+  remote: Compressing objects:  18% (17/93)        
+  remote: Compressing objects:  19% (18/93)        
+  remote: Compressing objects:  20% (19/93)        
+  remote: Compressing objects:  21% (20/93)        
+  remote: Compressing objects:  22% (21/93)        
+  remote: Compressing objects:  23% (22/93)        
+  remote: Compressing objects:  24% (23/93)        
+  remote: Compressing objects:  25% (24/93)        
+  remote: Compressing objects:  26% (25/93)        
+  remote: Compressing objects:  27% (26/93)        
+  remote: Compressing objects:  29% (27/93)        
+  remote: Compressing objects:  30% (28/93)        
+  remote: Compressing objects:  31% (29/93)        
+  remote: Compressing objects:  32% (30/93)        
+  remote: Compressing objects:  33% (31/93)        
+  remote: Compressing objects:  34% (32/93)        
+  remote: Compressing objects:  35% (33/93)        
+  remote: Compressing objects:  36% (34/93)        
+  remote: Compressing objects:  37% (35/93)        
+  remote: Compressing objects:  38% (36/93)        
+  remote: Compressing objects:  39% (37/93)        
+  remote: Compressing objects:  40% (38/93)        
+  remote: Compressing objects:  41% (39/93)        
+  remote: Compressing objects:  43% (40/93)        
+  remote: Compressing objects:  44% (41/93)        
+  remote: Compressing objects:  45% (42/93)        
+  remote: Compressing objects:  46% (43/93)        
+  remote: Compressing objects:  47% (44/93)        
+  remote: Compressing objects:  48% (45/93)        
+  remote: Compressing objects:  49% (46/93)        
+  remote: Compressing objects:  50% (47/93)        
+  remote: Compressing objects:  51% (48/93)        
+  remote: Compressing objects:  52% (49/93)        
+  remote: Compressing objects:  53% (50/93)        
+  remote: Compressing objects:  54% (51/93)        
+  remote: Compressing objects:  55% (52/93)        
+  remote: Compressing objects:  56% (53/93)        
+  remote: Compressing objects:  58% (54/93)        
+  remote: Compressing objects:  59% (55/93)        
+  remote: Compressing objects:  60% (56/93)        
+  remote: Compressing objects:  61% (57/93)        
+  remote: Compressing objects:  62% (58/93)        
+  remote: Compressing objects:  63% (59/93)        
+  remote: Compressing objects:  64% (60/93)        
+  remote: Compressing objects:  65% (61/93)        
+  remote: Compressing objects:  66% (62/93)        
+  remote: Compressing objects:  67% (63/93)        
+  remote: Compressing objects:  68% (64/93)        
+  remote: Compressing objects:  69% (65/93)        
+  remote: Compressing objects:  70% (66/93)        
+  remote: Compressing objects:  72% (67/93)        
+  remote: Compressing objects:  73% (68/93)        
+  remote: Compressing objects:  74% (69/93)        
+  remote: Compressing objects:  75% (70/93)        
+  remote: Compressing objects:  76% (71/93)        
+  remote: Compressing objects:  77% (72/93)        
+  remote: Compressing objects:  78% (73/93)        
+  remote: Compressing objects:  79% (74/93)        
+  remote: Compressing objects:  80% (75/93)        
+  remote: Compressing objects:  81% (76/93)        
+  remote: Compressing objects:  82% (77/93)        
+  remote: Compressing objects:  83% (78/93)        
+  remote: Compressing objects:  84% (79/93)        
+  remote: Compressing objects:  86% (80/93)        
+  remote: Compressing objects:  87% (81/93)        
+  remote: Compressing objects:  88% (82/93)        
+  remote: Compressing objects:  89% (83/93)        
+  remote: Compressing objects:  90% (84/93)        
+  remote: Compressing objects:  91% (85/93)        
+  remote: Compressing objects:  92% (86/93)        
+  remote: Compressing objects:  93% (87/93)        
+  remote: Compressing objects:  94% (88/93)        
+  remote: Compressing objects:  95% (89/93)        
+  remote: Compressing objects:  96% (90/93)        
+  remote: Compressing objects:  97% (91/93)        
+  remote: Compressing objects:  98% (92/93)        
+  remote: Compressing objects: 100% (93/93)        
+  remote: Compressing objects: 100% (93/93), done.        
+  Receiving objects:   0% (1/115)
+  Receiving objects:   1% (2/115)
+  Receiving objects:   2% (3/115)
+  Receiving objects:   3% (4/115)
+  Receiving objects:   4% (5/115)
+  Receiving objects:   5% (6/115)
+  Receiving objects:   6% (7/115)
+  Receiving objects:   7% (9/115)
+  Receiving objects:   8% (10/115)
+  Receiving objects:   9% (11/115)
+  Receiving objects:  10% (12/115)
+  Receiving objects:  11% (13/115)
+  Receiving objects:  12% (14/115)
+  Receiving objects:  13% (15/115)
+  Receiving objects:  14% (17/115)
+  Receiving objects:  15% (18/115)
+  Receiving objects:  16% (19/115)
+  Receiving objects:  17% (20/115)
+  Receiving objects:  18% (21/115)
+  Receiving objects:  19% (22/115)
+  Receiving objects:  20% (23/115)
+  Receiving objects:  21% (25/115)
+  Receiving objects:  22% (26/115)
+  Receiving objects:  23% (27/115)
+  Receiving objects:  24% (28/115)
+  Receiving objects:  25% (29/115)
+  Receiving objects:  26% (30/115)
+  Receiving objects:  27% (32/115)
+  Receiving objects:  28% (33/115)
+  Receiving objects:  29% (34/115)
+  Receiving objects:  30% (35/115)
+  Receiving objects:  31% (36/115)
+  Receiving objects:  32% (37/115)
+  Receiving objects:  33% (38/115)
+  Receiving objects:  34% (40/115)
+  Receiving objects:  35% (41/115)
+  Receiving objects:  36% (42/115)
+  Receiving objects:  37% (43/115)
+  Receiving objects:  38% (44/115)
+  Receiving objects:  39% (45/115)
+  Receiving objects:  40% (46/115)
+  Receiving objects:  41% (48/115)
+  Receiving objects:  42% (49/115)
+  Receiving objects:  43% (50/115)
+  Receiving objects:  44% (51/115)
+  Receiving objects:  45% (52/115)
+  Receiving objects:  46% (53/115)
+  Receiving objects:  47% (55/115)
+  Receiving objects:  48% (56/115)
+  Receiving objects:  49% (57/115)
+  Receiving objects:  50% (58/115)
+  Receiving objects:  51% (59/115)
+  Receiving objects:  52% (60/115)
+  Receiving objects:  53% (61/115)
+  Receiving objects:  54% (63/115)
+  Receiving objects:  55% (64/115)
+  Receiving objects:  56% (65/115)
+  Receiving objects:  57% (66/115)
+  Receiving objects:  58% (67/115)
+  Receiving objects:  59% (68/115)
+  Receiving objects:  60% (69/115)
+  Receiving objects:  61% (71/115)
+  Receiving objects:  62% (72/115)
+  Receiving objects:  63% (73/115)
+  Receiving objects:  64% (74/115)
+  Receiving objects:  65% (75/115)
+  Receiving objects:  66% (76/115)
+  Receiving objects:  67% (78/115)
+  Receiving objects:  68% (79/115)
+  Receiving objects:  69% (80/115)
+  Receiving objects:  70% (81/115)
+  Receiving objects:  71% (82/115)
+  Receiving objects:  72% (83/115)
+  Receiving objects:  73% (84/115)
+  Receiving objects:  74% (86/115)
+  Receiving objects:  75% (87/115)
+  Receiving objects:  76% (88/115)
+  Receiving objects:  77% (89/115)
+  Receiving objects:  78% (90/115)
+  Receiving objects:  79% (91/115)
+  Receiving objects:  80% (92/115)
+  Receiving objects:  81% (94/115)
+  Receiving objects:  82% (95/115)
+  Receiving objects:  83% (96/115)
+  remote: Total 115 (delta 12), reused 99 (delta 10), pack-reused 0 (from 0)        
+  Receiving objects:  84% (97/115)
+  Receiving objects:  85% (98/115)
+  Receiving objects:  86% (99/115)
+  Receiving objects:  87% (101/115)
+  Receiving objects:  88% (102/115)
+  Receiving objects:  89% (103/115)
+  Receiving objects:  90% (104/115)
+  Receiving objects:  91% (105/115)
+  Receiving objects:  92% (106/115)
+  Receiving objects:  93% (107/115)
+  Receiving objects:  94% (109/115)
+  Receiving objects:  95% (110/115)
+  Receiving objects:  96% (111/115)
+  Receiving objects:  97% (112/115)
+  Receiving objects:  98% (113/115)
+  Receiving objects:  99% (114/115)
+  Receiving objects: 100% (115/115)
+  Receiving objects: 100% (115/115), 1.43 MiB | 19.58 MiB/s, done.
+  Resolving deltas:   0% (0/12)
+  Resolving deltas:   8% (1/12)
+  Resolving deltas:  16% (2/12)
+  Resolving deltas:  25% (3/12)
+  Resolving deltas:  50% (6/12)
+  Resolving deltas:  75% (9/12)
+  Resolving deltas:  91% (11/12)
+  Resolving deltas: 100% (12/12)
+  Resolving deltas: 100% (12/12), done.
+  From https://github.inl.gov/Digital-Engineering/ExpertLabelGDO
+   * [new branch]      development -> origin/development
+Determining the checkout info
+  /usr/bin/git branch --list --remote origin/development
+    origin/development
+Checking out the ref
+  /usr/bin/git checkout --progress --force -B development refs/remotes/origin/development
+  Switched to a new branch 'development'
+  Branch 'development' set up to track remote branch 'development' from 'origin'.
+/usr/bin/git log -1 --format='%H'
+'138642014f6e3252109ba57167f76f7020d02f99'
+1s
+Run azure/setup-kubectl@v3
+  with:
+    version: latest
+0s
+Run cd $GITHUB_WORKSPACE/kubernetes
+  cd $GITHUB_WORKSPACE/kubernetes
+  envsubst < development.yaml > manifest.yaml
+  shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+  env:
+    CI_REGISTRY: ***
+    CI_REGISTRY_PATH: ***
+    GITHUB_RUN_NUMBER: 14
+    NEXT_PUBLIC_SUPABASE_URL: ***
+    NEXT_PUBLIC_SUPABASE_ANON_KEY: ***
+0s
+Run azure/k8s-set-context@v3
+  with:
+    method: kubeconfig
+    kubeconfig: ***
+    context: deploy-service-account
+    cluster-type: generic
+41s
+Run Azure/k8s-deploy@v4
+  with:
+    namespace: expertlabel-dev
+    action: deploy
+    force: true
+    strategy: basic
+    manifests: kubernetes/manifest.yaml
+  
+    pull-images: true
+    route-method: service
+    version-switch-buffer: 0
+    traffic-split-method: pod
+    percentage: 0
+    token: ***
+    annotate-namespace: true
+    private-cluster: false
+    skip-tls-verify: false
+  env:
+    KUBECONFIG: /work/_work/_temp/kubeconfig_1753757399270
+Deploying manifests
+  /work/_work/_tool/kubectl/1.31.0/x64/kubectl apply -f /tmp/manifest.yaml --force --namespace expertlabel-dev
+  namespace/expertlabel-dev unchanged
+  persistentvolumeclaim/expertlabel-data-pvc created
+  deployment.apps/expertlabel configured
+  service/expertlabel-service unchanged
+  ingress.networking.k8s.io/expertlabel-ingress unchanged
+Checking manifest stability
+  /work/_work/_tool/kubectl/1.31.0/x64/kubectl rollout status Deployment/expertlabel --namespace expertlabel-dev
+  Waiting for deployment "expertlabel" rollout to finish: 1 old replicas are pending termination...
+  Waiting for deployment "expertlabel" rollout to finish: 1 old replicas are pending termination...
+  deployment "expertlabel" successfully rolled out
+Printing ingresses
+  /work/_work/_tool/kubectl/1.31.0/x64/kubectl get ingress/expertlabel-ingress -o json --namespace expertlabel-dev
+  {
+      "apiVersion": "networking.k8s.io/v1",
+      "kind": "Ingress",
+      "metadata": {
+          "annotations": {
+              "actions.github.com/k8s-deploy": "{\"run\":\"9703\",\"repository\":\"Digital-Engineering/ExpertLabelGDO\",\"workflow\":\"Build Development\",\"workflowFileName\":\"development.yaml\",\"jobName\":\"kubernetes\",\"createdBy\":\"eduardo-trevino\",\"runUri\":\"https://github.com/Digital-Engineering/ExpertLabelGDO/actions/runs/9703\",\"commit\":\"322329c5ed59d95fcad38a3528e013545290b596\",\"lastSuccessRunCommit\":\"0befb587fe2bf7ca258294f7b66a97c5a1470617\",\"branch\":\"refs/heads/development\",\"deployTimestamp\":1744359086218,\"dockerfilePaths\":{},\"manifestsPaths\":[\"https://github.com/Digital-Engineering/ExpertLabelGDO/blob/322329c5ed59d95fcad38a3528e013545290b596/kubernetes/manifest.yaml\"],\"helmChartPaths\":[],\"provider\":\"GitHub\"}",
+              "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"networking.k8s.io/v1\",\"kind\":\"Ingress\",\"metadata\":{\"annotations\":{\"kubernetes.io/ingress.class\":\"nginx\",\"nginx.ingress.kubernetes.io/configuration-snippet\":\"more_clear_headers \\\"strict-transport-security\\\";\\nmore_clear_headers \\\"x-content-type-options\\\";\\nmore_clear_headers \\\"x-frame-options\\\";\\nmore_clear_headers \\\"content-security-policy\\\";\\n\",\"nginx.ingress.kubernetes.io/proxy-read-timeout\":\"3600\",\"nginx.ingress.kubernetes.io/proxy-send-timeout\":\"3600\"},\"name\":\"expertlabel-ingress\",\"namespace\":\"expertlabel-dev\"},\"spec\":{\"rules\":[{\"host\":\"expertlabel.dev.inl.gov\",\"http\":{\"paths\":[{\"backend\":{\"service\":{\"name\":\"expertlabel-service\",\"port\":{\"number\":80}}},\"path\":\"/\",\"pathType\":\"Prefix\"}]}}]}}\n",
+              "kubernetes.io/ingress.class": "nginx",
+              "nginx.ingress.kubernetes.io/configuration-snippet": "more_clear_headers \"strict-transport-security\";\nmore_clear_headers \"x-content-type-options\";\nmore_clear_headers \"x-frame-options\";\nmore_clear_headers \"content-security-policy\";\n",
+              "nginx.ingress.kubernetes.io/proxy-read-timeout": "3600",
+              "nginx.ingress.kubernetes.io/proxy-send-timeout": "3600"
+          },
+          "creationTimestamp": "2025-04-08T20:20:49Z",
+          "generation": 1,
+          "labels": {
+              "workflow": "actions.github.com-k8s-deploy",
+              "workflowFriendlyName": "Build_Development"
+          },
+          "name": "expertlabel-ingress",
+          "namespace": "expertlabel-dev",
+          "resourceVersion": "60631246",
+          "uid": "739dbb08-27dc-424b-b82a-187abf1ca6f8"
+      },
+      "spec": {
+          "rules": [
+              {
+                  "host": "expertlabel.dev.inl.gov",
+                  "http": {
+                      "paths": [
+                          {
+                              "backend": {
+                                  "service": {
+                                      "name": "expertlabel-service",
+                                      "port": {
+                                          "number": 80
+                                      }
+                                  }
+                              },
+                              "path": "/",
+                              "pathType": "Prefix"
+                          }
+                      ]
+                  }
+              }
+          ]
+      },
+      "status": {
+          "loadBalancer": {
+              "ingress": [
+                  {
+                      "ip": "10.60.31.101"
+                  }
+              ]
+          }
+      }
+  }
+Annotating resources
+0s
+Post job cleanup.
+/usr/bin/git version
+git version 2.25.1
+Temporarily overriding HOME='/work/_work/_temp/23e62214-5ba4-4509-be2d-d1399d1b3f0f' before making global git config changes
+Adding repository directory to the temporary git global config as a safe directory
+/usr/bin/git config --global --add safe.directory /work/_work/ExpertLabelGDO/ExpertLabelGDO
+/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.inl\.gov\/\.extraheader
+http.https://github.inl.gov/.extraheader
+/usr/bin/git config --local --unset-all http.https://github.inl.gov/.extraheader
+/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.inl\.gov\/\.extraheader' && git config --local --unset-all 'http.https://github.inl.gov/.extraheader' || :"
+0s
+Cleaning up orphan processes
+

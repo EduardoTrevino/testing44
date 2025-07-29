@@ -1,80 +1,54 @@
 "use client";
 
 import React, { useState } from "react";
-import { getSupabaseClient } from "@/lib/supabase";
+// REMOVED: import { getSupabaseClient } from "@/lib/supabase";
+// import { getSubstations, getComponentPolygons } from "@/lib/data"; // IMPORTED
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast"; // Import useToast for feedback
+import { SubstationData, ComponentPolygon } from './../lib/types'; // IMPORT types
 
-// Define the updated interface, matching AnnotateTab/CompleteTab
-interface ComponentPolygon {
-    id: string;
-    substation_id: string | null;
-    substation_uuid?: string | null;
-    label: string;
-    geometry: any;
-    created_at: string;
-    substation_full_id?: string;
-    from_osm: boolean;
-    additional_info?: string | null; // New field
-    annotation_by?: string | null;   // New field
-    // confirmed?: boolean; // Deprecated, removed from interface for clarity here
-  }
-
-interface SubstationData {
-    id: string;
-    full_id?: string;
-    name?: string;
-    substation_type?: string | null;
-    geometry: any; // Keep for potential future use, though not directly used in downloads now
-    created_at: string;
-    completed: boolean;
-}
 
 
 export default function DownloadTab() {
   const [downloading, setDownloading] = useState(false);
   const { toast } = useToast(); // Initialize toast
 
-  // Fetch complete substations and their component polygons
+  // Fetch complete substations and their component polygons from local files
   async function fetchCompleteAnnotations() {
-    const supabase = getSupabaseClient();
+    try {
+      // 1. Get all substations from the JSON file
+      const [substationsResponse, polygonsResponse] = await Promise.all([
+        fetch('/api/substations'),
+        fetch('/api/polygons')
+      ]);
 
-    // 1. Get complete substations (only need IDs and potentially names/full_ids for COCO)
-    let { data: completeSubs, error: subError } = await supabase
-      .from("substations")
-      .select("id, full_id, name") // Select only needed fields
-      .eq("completed", true);
+      if (!substationsResponse.ok) throw new Error('Failed to fetch substations');
+      if (!polygonsResponse.ok) throw new Error('Failed to fetch polygons');
 
-    if (subError) {
-        console.error("Error fetching substations:", subError);
-        throw new Error(`Failed to fetch substations: ${subError.message}`);
+      const allSubstations: SubstationData[] = await substationsResponse.json();
+      const allPolygons: ComponentPolygon[] = await polygonsResponse.json();
+      
+      // 2. Perform filtering logic in memory (no changes here)
+      const completeSubs = allSubstations.filter(sub => sub.completed);
+
+      if (completeSubs.length === 0) {
+        return { completeSubs: [], annotations: [] };
+      }
+
+      const completeIds = completeSubs.map((sub) => sub.id);
+
+      const annotations = allPolygons.filter(
+        p => p.substation_uuid && completeIds.includes(p.substation_uuid) && !p.from_osm
+      );
+
+      return {
+          completeSubs: completeSubs,
+          annotations: annotations
+      };
+    } catch (error: any) {
+        console.error("Error fetching annotations from files:", error);
+        throw new Error(`Failed to fetch annotations for download: ${error.message}`);
     }
-    if (!completeSubs) completeSubs = [];
-
-    // Extract an array of substation ids
-    const completeIds = completeSubs.map((sub) => sub.id);
-
-    if (completeIds.length === 0) {
-        return { completeSubs: [], annotations: [] }; // No completed substations, return empty
-    }
-
-    // 2. Get component_polygons that belong to these complete substations.
-    // Select all relevant fields, including the new ones. Exclude 'confirmed'.
-    let { data: annotations, error: annError } = await supabase
-      .from("component_polygons")
-      .select("id, substation_uuid, substation_full_id, label, additional_info, annotation_by, created_at, geometry") // Explicitly select columns, exclude 'confirmed'
-      .in("substation_uuid", completeIds)
-      .eq("from_osm", false); // Only user annotations
-
-    if (annError) {
-        console.error("Error fetching annotations:", annError);
-        throw new Error(`Failed to fetch annotations: ${annError.message}`);
-    }
-
-    return {
-        completeSubs: completeSubs as SubstationData[], // Cast needed fields
-        annotations: (annotations || []) as ComponentPolygon[] // Cast result
-    };
   }
 
   // Helper: force download a file in browser

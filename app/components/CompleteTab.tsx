@@ -2,24 +2,27 @@
 
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import dynamic from "next/dynamic";
-import { getSupabaseClient } from "@/lib/supabase";
-import { useUserStore } from "@/lib/store"; // Import the user store
+// REMOVED: import { getSupabaseClient } from "@/lib/supabase";
+// import {
+//   getSubstations,
+//   getComponentPolygons,
+//   writeSubstations,
+//   writeComponentPolygons,
+//   generateId,
+// } from "@/lib/data"; // IMPORTED
+import { useUserStore } from "@/lib/store";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input"; // Import Input component
-import { Textarea } from "@/components/ui/textarea"; // Import Textarea for additional info
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogFooter,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Switch } from "@/components/ui/switch";
-import { Copy, Expand, Minimize, RefreshCcw } from 'lucide-react'; // Added RefreshCcw for Reopen
+import { Copy, Expand, Minimize, RefreshCcw } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
+import { SubstationData, ComponentPolygon } from './../lib/types'; // IMPORT types
+import { v4 as uuidv4 } from 'uuid'; // Import uuid
 
 // Dynamically import the Leaflet map
 const MapLeaflet = dynamic(() => import("@/components/MapLeaflet"), { ssr: false });
@@ -41,30 +44,30 @@ const COMPONENT_OPTIONS = [
     "Tripolar disconnect switch", "Vehicles",
 ].sort(); // Use the same sorted list as AnnotateTab
 
-// Interfaces should match AnnotateTab
-interface SubstationData {
-  id: string;
-  full_id?: string;
-  name?: string;
-  substation_type?: string | null;
-  geometry: any;
-  created_at: string;
-  completed: boolean;
-}
+// // Interfaces should match AnnotateTab
+// interface SubstationData {
+//   id: string;
+//   full_id?: string;
+//   name?: string;
+//   substation_type?: string | null;
+//   geometry: any;
+//   created_at: string;
+//   completed: boolean;
+// }
 
-interface ComponentPolygon {
-  id: string;
-  substation_id: string | null;
-  substation_uuid?: string | null;
-  label: string;
-  geometry: any;
-  created_at: string;
-  substation_full_id?: string;
-  from_osm: boolean;
-  additional_info?: string | null;
-  annotation_by?: string | null;
-  confirmed?: boolean;
-}
+// interface ComponentPolygon {
+//   id: string;
+//   substation_id: string | null;
+//   substation_uuid?: string | null;
+//   label: string;
+//   geometry: any;
+//   created_at: string;
+//   substation_full_id?: string;
+//   from_osm: boolean;
+//   additional_info?: string | null;
+//   annotation_by?: string | null;
+//   confirmed?: boolean;
+// }
 
 export default function CompleteTab() {
   const [substations, setSubstations] = useState<SubstationData[]>([]);
@@ -105,39 +108,38 @@ export default function CompleteTab() {
   }, [selectedSubstation]);
 
   async function fetchCompletedSubstations() {
-    const supabase = getSupabaseClient();
-    const { data, error } = await supabase
-      .from("substations")
-      .select("*")
-      .eq("completed", true) // Fetch completed ones
-      .order("created_at", { ascending: false }); // Show most recent first
-    if (error) {
-      console.error("Error fetching completed substations:", error);
-      toast({ variant: "destructive", title: "Error", description: "Could not load completed substations." });
-      return;
-    }
-    setSubstations(data || []);
-    if (data && data.length > 0) {
-      setSelectedSubstation(data[0]);
-    } else {
-      setSelectedSubstation(null);
+    try {
+      const response = await fetch('/api/substations');
+      if (!response.ok) throw new Error('Failed to fetch substations');
+      const allSubstations: SubstationData[] = await response.json();
+        const completed = allSubstations
+            .filter(s => s.completed)
+            .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()); // Show most recent first
+
+        setSubstations(completed);
+        if (completed.length > 0) {
+            setSelectedSubstation(completed[0]);
+        } else {
+            setSelectedSubstation(null);
+        }
+    } catch (error) {
+        console.error("Error fetching completed substations:", error);
+        toast({ variant: "destructive", title: "Error", description: "Could not load completed substations." });
     }
   }
 
   async function fetchComponentPolygons(substationId: string) {
-    const supabase = getSupabaseClient();
-    const { data, error } = await supabase
-      .from("component_polygons")
-      .select("*")
-      .eq("substation_uuid", substationId); // Fetch by UUID
-
-    if (error) {
+    try {
+        const response = await fetch('/api/polygons');
+        if (!response.ok) throw new Error('Failed to fetch polygons');
+        const allPolygons: ComponentPolygon[] = await response.json();
+        const forSubstation = allPolygons.filter(p => p.substation_uuid === substationId);
+        setComponentPolygons(forSubstation);
+    } catch (error) {
         console.error("Error fetching component polygons:", error);
         toast({ variant: "destructive", title: "Error", description: "Could not load component polygons." });
         setComponentPolygons([]);
-        return;
     }
-    setComponentPolygons(data || []);
   }
 
   // ─────────────────────────────────────────────────────────────
@@ -161,7 +163,7 @@ export default function CompleteTab() {
 
     const newPoly: ComponentPolygon = {
       id: `temp-${Date.now()}`,
-      substation_id: selectedSubstation.id,
+      // substation_id: selectedSubstation.id,
       substation_uuid: selectedSubstation.id,
       label: "", // Will be set on save
       geometry: geojson.geometry,
@@ -227,43 +229,73 @@ export default function CompleteTab() {
 
     const isTemp = dialogPolygon.id.startsWith("temp-");
     const geometry = dialogPolygon.geometry;
+
     if (!geometry) {
-        toast({ variant: "destructive", title: "Geometry Missing" });
+        toast({ variant: "destructive", title: "Geometry Missing", description: "Cannot save annotation without geometry data." });
         return;
     }
 
-    const payload = {
-      substation_uuid: selectedSubstation.id,
-      substation_full_id: dialogPolygon.substation_full_id ?? selectedSubstation.full_id ?? null,
-      label: selectedComponent,
-      geometry: geometry,
-      from_osm: false,
-      additional_info: dialogAdditionalInfo.trim() || null,
-      annotation_by: annotatorName, // Log who made the change
-    };
-
-    const supabase = getSupabaseClient();
-    let savedPolygon: ComponentPolygon | null = null;
-
     try {
+        const allPolygons = await (await fetch('/api/polygons')).json() as ComponentPolygon[];
+        let savedPolygon: ComponentPolygon;
+        let newPolygonList: ComponentPolygon[];
+
         if (isTemp) {
-            const { data, error } = await supabase.from("component_polygons").insert([payload]).select("*").single();
-            if (error) throw error;
-            savedPolygon = data as ComponentPolygon;
-            setComponentPolygons((prev) => [...prev, savedPolygon!]);
-            toast({ title: "Annotation Saved", description: `Component "${savedPolygon!.label === 'Other' ? savedPolygon!.additional_info?.substring(0,30)+'...' : savedPolygon!.label}" added.` });
+            // INSERT (Your original logic for this is perfect and remains unchanged)
+            savedPolygon = {
+                id: uuidv4(),
+                substation_uuid: selectedSubstation.id,
+                label: selectedComponent,
+                geometry: geometry,
+                created_at: new Date().toISOString(),
+                substation_full_id: selectedSubstation.full_id || null,
+                from_osm: false,
+                additional_info: dialogAdditionalInfo.trim() || null,
+                annotation_by: annotatorName,
+            };
+            newPolygonList = [...allPolygons, savedPolygon];
+            toast({ title: "Annotation Saved", description: `Component "${savedPolygon.label === 'Other' ? savedPolygon.additional_info?.substring(0,30)+'...' : savedPolygon.label}" added.` });
         } else {
-            const { data, error } = await supabase.from("component_polygons").update(payload).eq("id", dialogPolygon.id).select("*").single();
-             if (error) throw error;
-             savedPolygon = data as ComponentPolygon;
-             setComponentPolygons((prev) => prev.map((p) => (p.id === dialogPolygon.id ? savedPolygon! : p)));
-             toast({ title: "Annotation Updated", description: `Component "${savedPolygon!.label === 'Other' ? savedPolygon!.additional_info?.substring(0,30)+'...' : savedPolygon!.label}" updated.` });
+            // UPDATE (This is the minimally changed block)
+            const polygonIndex = allPolygons.findIndex(p => p.id === dialogPolygon.id);
+
+            if (polygonIndex === -1) {
+                throw new Error("Polygon to update not found in file.");
+            }
+
+            // Create the updated polygon object.
+            savedPolygon = {
+                ...allPolygons[polygonIndex], // Start with the existing polygon data
+                label: selectedComponent,
+                additional_info: dialogAdditionalInfo.trim() || null,
+                annotation_by: annotatorName,
+            };
+
+            // Create the new list by replacing the item at the found index.
+            newPolygonList = [...allPolygons];
+            newPolygonList[polygonIndex] = savedPolygon;
+
+            // This toast message will now work without errors.
+            toast({ title: "Annotation Updated", description: `Component "${savedPolygon.label === 'Other' ? savedPolygon.additional_info?.substring(0,30)+'...' : savedPolygon.label}" updated.` });
         }
+
+        // The type error on the next line is also solved because all components
+        // now share the same ComponentPolygon type from app/lib/types.ts
+        const postResponse = await fetch('/api/polygons', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newPolygonList),
+        });
+        if (!postResponse.ok) throw new Error('Failed to save polygons');
+        
+        // Refresh local state
+        setComponentPolygons(newPolygonList.filter(p => p.substation_uuid === selectedSubstation.id));
         setDialogOpen(false);
         setDialogPolygon(null);
+
     } catch (error: any) {
-        console.error(`Error ${isTemp ? 'saving' : 'updating'} polygon:`, error);
-        toast({ variant: "destructive", title: `${isTemp ? 'Save' : 'Update'} Failed`, description: error?.message });
+        console.error(`Error ${isTemp ? 'inserting' : 'updating'} polygon:`, error);
+        toast({ variant: "destructive", title: `${isTemp ? 'Save' : 'Update'} Failed`, description: error?.message || "Could not save annotation." });
     }
   }
 
@@ -280,11 +312,25 @@ export default function CompleteTab() {
     const confirmed = window.confirm(`Are you sure you want to delete the component "${dialogPolygon.label}" from this completed substation? This cannot be undone.`);
     if (!confirmed) return;
 
-    const supabase = getSupabaseClient();
     try {
-        const { error } = await supabase.from("component_polygons").delete().eq("id", dialogPolygon.id);
-        if (error) throw error;
-        setComponentPolygons((prev) => prev.filter((x) => x.id !== dialogPolygon.id));
+        const response = await fetch('/api/polygons');
+        if (!response.ok) throw new Error('Failed to fetch current polygons');
+        const allPolygons: ComponentPolygon[] = await response.json();
+        const newPolygonList = allPolygons.filter((p) => p.id !== dialogPolygon.id);
+        
+        if (newPolygonList.length === allPolygons.length) {
+            throw new Error("Polygon to delete not found in file.");
+        }
+
+        const postResponse = await fetch('/api/polygons', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newPolygonList),
+      });
+
+        if (!postResponse.ok) throw new Error('Failed to save updated polygon list');
+        
+        setComponentPolygons(prev => prev.filter((p) => p.id !== dialogPolygon.id));
         toast({ title: "Annotation Deleted", description: `Component "${dialogPolygon.label}" removed.` });
         setDialogOpen(false);
         setDialogPolygon(null);
@@ -297,26 +343,42 @@ export default function CompleteTab() {
   // ─────────────────────────────────────────────────────────────
   // Reopen Logic (Specific to CompleteTab)
   // ─────────────────────────────────────────────────────────────
-  async function handleReopenSubstation() {
+    async function handleReopenSubstation() {
     if (!selectedSubstation) return;
 
     const confirmed = window.confirm(`Are you sure you want to reopen substation "${selectedSubstation.full_id || selectedSubstation.name || selectedSubstation.id}"? It will move back to the 'Annotate' tab.`);
     if (!confirmed) return;
 
-    const supabase = getSupabaseClient();
     try {
-        const { error } = await supabase
-            .from("substations")
-            .update({ completed: false })
-            .eq("id", selectedSubstation.id);
-        if (error) throw error;
+        const response = await fetch('/api/substations');
+        if (!response.ok) throw new Error('Failed to fetch current substations');
+        let allSubstations: SubstationData[] = await response.json();
+        let wasUpdated = false;
+        const updatedSubstations = allSubstations.map(sub => {
+            if (sub.id === selectedSubstation.id) {
+                wasUpdated = true;
+                return { ...sub, completed: false }; // Set completed to false
+            }
+            return sub;
+        });
+
+        if (!wasUpdated) {
+            throw new Error("Substation to reopen not found in file.");
+        }
+
+        // 3. Post the new, complete list back to the API
+        const postResponse = await fetch('/api/substations', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(updatedSubstations),
+      });
+
+        if (!postResponse.ok) throw new Error('Failed to save updated substations list');
 
         toast({ title: "Substation Reopened!", description: `ID: ${selectedSubstation.id} moved to Annotate tab.` });
-        // Remove from local list and select next available completed one
-        const remainingSubstations = substations.filter((s) => s.id !== selectedSubstation.id);
-        setSubstations(remainingSubstations);
-        setSelectedSubstation(remainingSubstations[0] || null); // Select the next one or null
-        setComponentPolygons([]); // Clear polygons for the newly selected one
+        
+        // Refresh the list of completed substations
+        fetchCompletedSubstations();
 
     } catch (error: any) {
       console.error("Error reopening substation:", error);
@@ -332,7 +394,7 @@ export default function CompleteTab() {
     if (!selectedSubstation) return [];
     const boundaryPolygon: ComponentPolygon = {
       id: "substation_boundary_" + selectedSubstation.id,
-      substation_id: selectedSubstation.id,
+      // substation_id: selectedSubstation.id,
       substation_uuid: selectedSubstation.id,
       label: "power_substation_polygon",
       geometry: selectedSubstation.geometry,

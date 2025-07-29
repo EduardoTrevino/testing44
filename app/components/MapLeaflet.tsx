@@ -17,24 +17,7 @@ import "leaflet/dist/leaflet.css";
 import "leaflet-draw/dist/leaflet.draw.css";
 import PrivateTileLayer from './PrivateTileLayer';
 import { ScrollArea } from "@/components/ui/scroll-area"; // Import if using shadcn ScrollArea for legend
-
-// Interface matching AnnotateTab.tsx
-export interface ComponentPolygon {
-  id: string;
-  substation_id: string | null;
-  substation_uuid?: string | null; // Use if this field name is used
-  label: string;
-  geometry: {
-    type: string;
-    coordinates: any;
-  };
-  created_at: string;
-  substation_full_id?: string;
-  from_osm: boolean;
-  additional_info?: string | null; // Include for tooltips
-  annotation_by?: string | null;
-  confirmed?: boolean;
-}
+import { SubstationData, ComponentPolygon } from './../lib/types'; // IMPORT types
 
 const LABEL_COLORS: Record<string, string> = {
   "Power Compensator": "#00AAFF", // cyan-blue
@@ -278,7 +261,7 @@ export default function MapLeaflet({
   // Identify substation ID for FitBounds dependency
   // Use optional chaining and provide a fallback key
   const substationId = useMemo(() => {
-      return polygons.find(p => p.label === 'power_substation_polygon')?.substation_id ?? 'no-substation-selected';
+      return polygons.find(p => p.label === 'power_substation_polygon')?.substation_uuid ?? 'no-substation-selected';
   }, [polygons]);
 
   // Find the substation full_id, which we need for the tile path
